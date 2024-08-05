@@ -4,28 +4,28 @@ import HolidayList from "../components/HolidayList";
 import { Holiday } from "../types/Holiday";
 import "@testing-library/jest-dom";
 
-const mockHolidays: Holiday[] = [
-    {
-      Date: "2022-01-01",
-      "Holiday Name": "New Year's Day",
-      Type: "Regional Holiday",
-      Country: "India", // Added missing property
-      "Country Code": "IN", // Added missing property
-      Day: "Saturday", // Added missing property
-      Comments: "", // Added missing property
-    },
-    {
-      Date: "2022-01-02",
-      "Holiday Name": "Mannam Jayanthi",
-      Type: "Regional Holiday",
-      Country: "India", // Added missing property
-      "Country Code": "IN", // Added missing property
-      Day: "Sunday", // Added missing property
-      Comments: "", // Added missing property
-    },
-  ];
-
 describe("HolidayList", () => {
+    const mockHolidays: Holiday[] = [
+        {
+          Date: "2022-01-01",
+          "Holiday Name": "New Year's Day",
+          Type: "Regional Holiday",
+          Country: "India", // Added missing property
+          "Country Code": "IN", // Added missing property
+          Day: "Saturday", // Added missing property
+          Comments: "", // Added missing property
+        },
+        {
+          Date: "2022-01-02",
+          "Holiday Name": "Mannam Jayanthi",
+          Type: "Regional Holiday",
+          Country: "India", // Added missing property
+          "Country Code": "IN", // Added missing property
+          Day: "Sunday", // Added missing property
+          Comments: "", // Added missing property
+        },
+      ];
+
     it("displays a list of holidays", () => {
         render(<HolidayList holidays={mockHolidays} />);
     

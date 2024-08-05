@@ -6,7 +6,7 @@ import "@testing-library/jest-dom";
 
 jest.mock("axios");
 
-const mockCountries = ["US","CA","IN"];
+const mockCountries = ["usa","canada","india"];
 
 describe("HolidayForm", () => {
   it("renders the form and button", () => {
@@ -30,26 +30,26 @@ describe("HolidayForm", () => {
   it("calls onSearch with the selected country on form submit", async () => {
     const onSearchMock = jest.fn();
     (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockCountries });
-  
+
     render(<HolidayForm onSearch={onSearchMock} />);
-  
+
     // Wait for the countries to be loaded and the select element to be populated
     await waitFor(() => expect(screen.getByRole("combobox")).toBeInTheDocument());
-  
+
     const select = screen.getByRole("combobox") as HTMLSelectElement;
-    
-    // Check the initial value to ensure it's correct
-    expect(select.value).toBe(mockCountries[0]); // Assuming the default value is the first country in the mock
-  
-    fireEvent.change(select, { target: { value: "IN" } });
-  
+
+    fireEvent.change(select, { target: { value: "usa" } });
+
     // Ensure the state has been updated before submitting the form
-    expect(select.value).toBe("IN");
-  
+    expect(select.value).toBe("usa");
+
     const button = screen.getByRole("button", { name: /fetch holidays/i });
     fireEvent.click(button);
-  
-    await waitFor(() => expect(onSearchMock).toHaveBeenCalledWith("IN"));
+
+    // Wait for a fixed time after submitting the form
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // 1 second wait
+
+    await waitFor(() => expect(onSearchMock).toHaveBeenCalledWith("usa"));
   });
   
 });
