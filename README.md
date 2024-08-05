@@ -40,10 +40,10 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 ### Basic functionality tests:
 There are 3 test suits to test HolidayFormm, HolidayList and App  files, to test them use:
 `npm test`
-[basic_tests](https://github.com/Apoorv0503/Holiday-tracker-TypeScipt/blob/main/src/Assests/basic_tests.png?raw=true)
+![basic_tests](https://github.com/Apoorv0503/Holiday-tracker-TypeScipt/blob/main/src/Assests/basic_tests.png?raw=true)
 
 ## TypeScript implementation tests:
 To test if the project is implemented using ts only, there is a separted script with some test cases. To run that script, we need a node environment, and to run this script use this command:
 `npm run check-files`
 
-[ts_implementation_tests](https://github.com/Apoorv0503/Holiday-tracker-TypeScipt/blob/main/src/Assests/ts_tests.png?raw=true)
+![ts_implementation_tests](https://github.com/Apoorv0503/Holiday-tracker-TypeScipt/blob/main/src/Assests/ts_tests.png?raw=true)
