@@ -18,18 +18,38 @@ const HolidayForm: React.FC<HolidayFormProps> = ({ onSearch }) => {
           "https://public-holidays-buildout-backend.onrender.com/countries"
         );
 
-        console.log(response.data);
-        setCountries(response.data);
-        if (response.data.length > 0) {
+        // handle the response
+        if (response && response.data) {
+              // console.log("fethced countries: ",response.data);
+              setCountries(response.data);
+            } 
+        else {
+              console.log('No data received from API');
+          }
+
+        //store one country in a state
+        if (response && response.data && response.data.length > 0) {
           setCountry(response.data[0]);
         }
       } catch (error) {
-        console.error("Error fetching countries:", error);
+        console.log("Error fetching countries:", error);
       }
     };
 
     fetchCountries();
   }, []);
+
+
+  // .then(response => {
+  //   if (response.data) {
+  //     setCountries(response.data);
+  //   } else {
+  //     console.error('No data received from API');
+  //   }
+  // })
+  // .catch(error => {
+  //   console.error('Error fetching countries:', error);
+  // });
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
