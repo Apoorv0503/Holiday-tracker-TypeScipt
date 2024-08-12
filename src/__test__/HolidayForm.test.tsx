@@ -47,7 +47,7 @@ describe("HolidayForm", () => {
     fireEvent.click(button);
 
     // Wait for a fixed time after submitting the form
-    await new Promise((resolve) => setTimeout(resolve, 4000)); // 1 second wait
+    await new Promise((resolve) => setTimeout(resolve, 4000)); // 4 second wait
 
     await waitFor(() => expect(onSearchMock).toHaveBeenCalledWith("usa"));
   });
