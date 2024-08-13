@@ -44,14 +44,16 @@ const testFolderToIgnore = path.join(__dirname, "../src/__test__");
     logError("TypeScript compilation failed. Please fix the errors.");
     console.error(error.stdout.toString());
     failedTests++;
+    process.exit(1); // Exit the script with a non-zero status code
   }
 
   // Check for .tsx extension in components
+  logInfo(
+    `Wait... Test case "Check for .tsx extension in components" is running...`
+  );
+
   fs.readdirSync(componentsPath).forEach((file) => {
     const ext = path.extname(file);
-    logInfo(
-      `Wait... Test case "Check for .tsx extension in components" is running...`
-    );
     if (ext && ext !== ".tsx" && ext !== ".css") {
       logError(`File ${file} has an unsupported extension: ${ext}`);
       failedTests++;
@@ -103,6 +105,11 @@ const testFolderToIgnore = path.join(__dirname, "../src/__test__");
   }
 
   // Check for any usage of 'any' type
+  logInfo(
+    `Wait... Test case "Check for any usage of 'any' type" is running...`
+  );
+
+  var anyPresent = false;
   const scanFilesForAny = (dir) => {
     fs.readdirSync(dir).forEach((file) => {
       const filePath = path.join(dir, file);
@@ -117,15 +124,19 @@ const testFolderToIgnore = path.join(__dirname, "../src/__test__");
         if (content.includes(": any")) {
           logError(`File ${filePath} contains 'any' type. Avoid using 'any'.`);
           failedTests++;
+          anyPresent = true;
         }
       }
     });
   };
 
-  logInfo(
-    `Wait... Test case "Check for any usage of 'any' type" is running...`
-  );
   scanFilesForAny(path.join(__dirname, "../src"));
+
+  //success message
+  if (!anyPresent) {
+    logSuccess("No file contains 'any' type.");
+    passedTests++;
+  }
 
   // Run ESLint to check for type annotations
   logInfo(
